@@ -26,7 +26,7 @@ public class ProdutoService {
     private FabricanteRepository fabricanteRepository;
     private EntityManager entityManager;
 
-    public Page<ProdutoEntity> buscarTodos(Integer offset,
+    public Page<ProdutoEntity> buscarTodos (Integer offset,
                                            Integer limit,
                                            ProdutoFiltrosRequest filtros) {
 
@@ -39,7 +39,7 @@ public class ProdutoService {
         );
     }
 
-    public ProdutoEntity buscarPorId(Long id){
+    public ProdutoEntity buscarPorId (Long id) {
 
         return produtoRepository.findById(id).get();
 //                .orElseThrow(() -> new EcomerceException(ERRO_AOBUSCAR));//TODO adicionar tratativa para optional empty
@@ -49,7 +49,7 @@ public class ProdutoService {
             return produtoRepository.findByCodigoBarra(codigoBarra);
     }
 
-    public ProdutoEntity criar(ProdutoRequest produtoRequest){
+    public ProdutoEntity criar (ProdutoRequest produtoRequest) {
 
         //valida descricao, sanitizacao... retira HTML, scripts de campos texto. pode ser na view.
         Optional<FabricanteEntity> fabricanteEntity = fabricanteRepository.findById(produtoRequest.getIdFabricante());
@@ -59,8 +59,8 @@ public class ProdutoService {
         return produtoRepository.save(produtoEntity);
     }
 
-    private  ProdutoEntity toEntity(ProdutoRequest produtoRequest,
-                                    FabricanteEntity fabricante){
+    private ProdutoEntity toEntity (ProdutoRequest produtoRequest,
+                                    FabricanteEntity fabricante) {
         return new ProdutoEntity(
                 produtoRequest.getNome(),
                 produtoRequest.getDescricao(),
@@ -71,40 +71,4 @@ public class ProdutoService {
                 produtoRequest.getPesoUnidadeMedida()
         );
     }
-
-
-
-
-
-/*
-    Filtro com Criteria
-*/
-//        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<ProdutoEntity> query = criteriaBuilder.createQuery(ProdutoEntity.class);
-//        Root<ProdutoEntity> produto = query.from(ProdutoEntity.class);
-//
-//        List<Predicate> predicates = new ArrayList();
-//
-//        if (nome != null){
-//            predicates.add(criteriaBuilder.like(produto.get("nome"), "%"+nome+"%"));
-//        }
-//
-//        predicates.add(criteriaBuilder.or(
-//                criteriaBuilder.equal(produto.get("nome"), "Pablo"),
-//                criteriaBuilder.equal(produto.get("nome"), "Diogo")
-//        ));
-////        /**
-////        select * from produto
-////        where valor <= 12
-////        and nome = Pablo or nome = Diogo
-////        */
-//
-//        if(valor != null ) {
-//            predicates.add(criteriaBuilder.lessThanOrEqualTo(produto.get("valor"), valor));
-//        }
-//
-//        query.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
-//
-//        return entityManager.createQuery(query).getResultList();
-
 }

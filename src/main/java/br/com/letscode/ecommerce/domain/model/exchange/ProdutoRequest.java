@@ -17,21 +17,20 @@ public class ProdutoRequest {
     //notblank
     private String nome;
 
-// @Sanitize
+    // @Sanitize
     private String descricao;
-
 
     private BigDecimal valor;
 
-//    @Pattern("")
+    // @Pattern("")
     private String codigoBarra;
 
     private Long idFabricante;
 
-//    @Positive
+    // @Positive
     private Integer peso;
 
-//    @valida enum
+    // @valida enum
     private String pesoUnidadeMedida;
 
 }

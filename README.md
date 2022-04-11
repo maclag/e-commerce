@@ -1,39 +1,31 @@
 # e-commerce
-Projeto de estudo de sistemas, E-comerce
+Projeto de estudo de sistemas, E-commerce
 
-Projeto do modulo: 
+### Projeto do modulo: 
+#### Construir um e-commerce onde seja possível gerenciar usuários e produtos, e criar um carrinho de compras.  
 
- Construir um e-commerce onde seja possível gerenciar usuarios e produtos, Criar um carrinho de compras.  
+- Produtos: Cadastrar, alterar, listar, consultar e remover produtos.
+- Usuários: Criar, alterar, listar, consultar e remover usuários. Autenticar usuário.
+- Carrinho de compras: criar um carrinho de compras (adicionar e remover produtos de um carrinho).
 
-Produtos:
-    Cadastrar, alterar, listar, consultar e remover produtos
+#### Requisitos:
+- Testes;
+- Conectar em uma base de dados postgres (docker ou cloud);
+- A aplicação deve salvar os dados na base de dados, podendo ser consultados após um restart da aplicacao.
+- Construção do projeto, estruturação.
 
-Usuarios : 
-    Criar, alterar,listar consultar e remover ususarios.
+#### Campos minimos:
+(os demais seguem como em projeto de aula, ex produto)
 
-Autenticar ususario
-
-Carrinho de compras:
-    Criar um carrinho de compras
-    adicionar e remover produtos de um carrinho.
-
-Requisitos:
- Testes
- conectar em uma base de dados postgres ( docker ou cloud)
- A aplicação deve salvar os dados na base de dados, podendo ser consultados após um restart da aplicacao.
- Construcao do projeto, estruturação.
-
-----------Campos minimos ( os demais segue como em projeto de aula, ex produto)
-Usuario:
-id
-nomeUsusario
-nome:
-data nascimento;
-data criacao:
+- Usuario:
+id,
+nome,
+data nascimento,
+data criacao,
 data alteracao
 
-Carrinho:
-Id carrinho
-data criacao
-data alteracao
+- Carrinho:
+id carrinho,
+data criacao,
+data alteracao,
 Itens

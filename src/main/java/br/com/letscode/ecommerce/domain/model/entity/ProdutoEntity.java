@@ -69,7 +69,7 @@ public class ProdutoEntity {
     private ZonedDateTime dataAtualizacao;
 
 
-    public ProdutoEntity(String nome, String descricao,
+    public ProdutoEntity (String nome, String descricao,
                          BigDecimal valor, String codigoBarra,
                          FabricanteEntity fabricante, Integer peso,
                          String pesoUnidadeMedida) {

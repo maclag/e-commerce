@@ -1,68 +1,32 @@
 package br.com.letscode.ecommerce.domain.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.Collection;
-import java.util.Set;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
-
+@Entity(name = "usuario")
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "usuario")
-public class UsuarioEntity implements UserDetails {
+public class UsuarioEntity {
 
     @Id
+    @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String usuario;
-    private String senha;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<PerfilEntity> perfis;
+    @Column(name = "NOME")
+    private String nome;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.perfis;
-    }
+    @Column(name = "DATA_NASCIMENTO")
+    private LocalDate dataNascimento;
 
-    @Override
-    public String getPassword() {
-        return this.senha;
-    }
+    @Column(name = "DATA_CRIACAO")
+    private ZonedDateTime dataCriacao;
 
-    @Override
-    public String getUsername() {
-        return this.usuario;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+    @Column(name = "DATA_ALTERACAO")
+    private ZonedDateTime dataAlteracao;
 }

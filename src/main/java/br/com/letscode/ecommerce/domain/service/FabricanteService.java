@@ -12,7 +12,7 @@ public class FabricanteService {
 
     private FabricanteRepository fabricanteRepository;
 
-    public FabricanteEntity criar(FabricanteRequest request){
+    public FabricanteEntity criar (FabricanteRequest request){
         return fabricanteRepository.save(request.toEntity());
     }
 }

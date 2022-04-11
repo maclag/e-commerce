@@ -10,6 +10,7 @@ public class ProdutoSpecifications {
     public static Specification<ProdutoEntity> valorMenorQue(BigDecimal valor) {
         return valor == null ? null : (produtoEntity, cq, cb) -> cb.lessThanOrEqualTo(produtoEntity.get("valor"),valor);
     }
+
     public static Specification<ProdutoEntity> nomeContem(String nome) {
         return nome == null ? null : (produtoEntity, cq, cb) -> cb.like(produtoEntity.get("nome"), "%" + nome + "%");
     }
