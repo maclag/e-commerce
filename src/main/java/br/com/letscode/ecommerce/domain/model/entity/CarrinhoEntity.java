@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -27,6 +28,6 @@ public class CarrinhoEntity {
     private ZonedDateTime dataAlteracao;
 
     @Column
-    @OneToMany()
-    private List<ProdutoEntity> produtos;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ProdutoEntity> produtos = new ArrayList<>();
 }

@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<UsuarioEntity,Long>,
+public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long>,
         JpaSpecificationExecutor<UsuarioEntity> {
 
-    @Query(value = "SELECT * FROM USUARIO WHERE NOME = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM USUARIO WHERE NOME = ?", nativeQuery = true)
     UsuarioEntity findByName(String nome);
 }

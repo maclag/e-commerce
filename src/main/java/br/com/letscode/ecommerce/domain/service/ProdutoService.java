@@ -26,6 +26,30 @@ public class ProdutoService {
     private FabricanteRepository fabricanteRepository;
     private EntityManager entityManager;
 
+    // CADASTRAR
+    public ProdutoEntity criar (ProdutoRequest produtoRequest) {
+        Optional<FabricanteEntity> fabricanteEntity = fabricanteRepository.findById(produtoRequest.getIdFabricante());
+        ProdutoEntity produtoEntity = toEntity(produtoRequest, fabricanteEntity.get());
+
+        return produtoRepository.save(produtoEntity);
+    }
+
+    // ALTERAR
+    public ProdutoEntity alterar (Long id, ProdutoRequest produtoRequest) {
+        Optional<ProdutoEntity> produto = produtoRepository.findById(id);
+
+        ProdutoEntity produtoEntity = produto.get();
+        produtoEntity.setNome(produtoRequest.getNome());
+        produtoEntity.setDescricao(produtoRequest.getDescricao());
+        produtoEntity.setValor(produtoRequest.getValor());
+        produtoEntity.setCodigoBarra(produtoRequest.getCodigoBarra());
+        produtoEntity.setPeso(produtoRequest.getPeso());
+        produtoEntity.setPesoUnidadeMedida(produtoRequest.getPesoUnidadeMedida());
+
+        return produtoRepository.save(produtoEntity);
+    }
+
+    // LISTAR
     public Page<ProdutoEntity> buscarTodos (Integer offset,
                                            Integer limit,
                                            ProdutoFiltrosRequest filtros) {
@@ -39,25 +63,23 @@ public class ProdutoService {
         );
     }
 
+    // CONSULTAR POR ID
     public ProdutoEntity buscarPorId (Long id) {
-
         return produtoRepository.findById(id).get();
-//                .orElseThrow(() -> new EcomerceException(ERRO_AOBUSCAR));//TODO adicionar tratativa para optional empty
     }
 
-    public ProdutoEntity buscarPorCodigoBarra(String codigoBarra){
+    // CONSULTAR POR CODIGO_BARRA
+    public ProdutoEntity buscarPorCodigoBarra (String codigoBarra){
             return produtoRepository.findByCodigoBarra(codigoBarra);
     }
 
-    public ProdutoEntity criar (ProdutoRequest produtoRequest) {
-
-        //valida descricao, sanitizacao... retira HTML, scripts de campos texto. pode ser na view.
-        Optional<FabricanteEntity> fabricanteEntity = fabricanteRepository.findById(produtoRequest.getIdFabricante());
-        //TODO implementar exception para o sistema
-        ProdutoEntity produtoEntity = toEntity(produtoRequest, fabricanteEntity.get());
-
-        return produtoRepository.save(produtoEntity);
+    // REMOVER
+    public ProdutoEntity remover (Long id) {
+        ProdutoEntity produtoEntity = buscarPorId(id);
+        produtoRepository.delete(produtoEntity);
+        return produtoEntity;
     }
+
 
     private ProdutoEntity toEntity (ProdutoRequest produtoRequest,
                                     FabricanteEntity fabricante) {
